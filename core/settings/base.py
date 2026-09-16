@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
@@ -40,6 +41,7 @@ LIBRARY_APPS = [
     'django_ckeditor_5',
     'modeltranslation',
     "corsheaders",
+    "rest_framework_simplejwt.token_blacklist",
 ]
 
 INSTALLED_APPS = [
@@ -181,3 +183,13 @@ CKEDITOR_5_CONFIGS = {
     },
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+}
